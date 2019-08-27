@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <p>Hvad er længden?</p>
+    <input type="number" id="a">
+    <p>Hvad er bredden? </p>
+    <input type="number" id="b">
+    <button>beregn</button>
+    <h2>Summen er: <span></span></h2>
+
+    <script>
+        const felt1 = document.querySelector("#a");
+        const felt2 = document.querySelector("#b");
+        const button = document.querySelector("button");
+        const output = document.querySelector("span");
+
+        button.addEventListener("click", areal);
+
+        function areal() {
+            const sum = findSum(parseInt(felt1.value), parseInt(felt2.value));
+            console.log(sum);
+            output.textContent = sum;
+        }
+
+        function findSum(a, b) {
+            const sum = a + b;
+            return sum;
+        }
+    </script>
+</body>
+
+</html>
