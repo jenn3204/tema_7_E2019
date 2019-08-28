@@ -10,20 +10,21 @@
     <style>
         #firkant {
             background-color: green;
-            height: 200px;
-            width: 200px;
+            height: 100px;
+            width: 100px;
             line-height: 100px;
             text-align: center;
         }
 
         #cirkel {
             background-color: red;
-            height: 200px;
-            width: 200px;
+            height: 100px;
+            width: 100px;
             border-radius: 50%;
             line-height: 100px;
             text-align: center;
         }
+
     </style>
 </head>
 
@@ -36,18 +37,18 @@
 
 
     <script>
-        let firkant = document.querySelector("#firkant");
-        let cirkel = document.querySelector("#cirkel");
+        document.addEventListener("DOMContentLoaded", start);
 
-        firkant.innerHTML = `<img src="img/frog.png" alt="frø">`;
-        cirkel.innerHTML = `<img src="img/pig.png" alt="gris">` + `<img src="http://mabe-kea.dk/E19/pics/fox.png" alt="fox">`;
+        function start() {
+            let firkant = document.querySelector("#firkant");
+            let cirkel = document.querySelector("#cirkel");
 
-        const foxImg = document.createElement("fox");
-        foxImg.src = "http://mabe-kea.dk/E19/pics/fox.png";
-        foxImg.alt = "billede af ræv";
+            firkant.innerHTML = `<img src="img/frog.png" alt="frø">`;
+            cirkel.innerHTML = `<img src="img/pig.png" alt="gris">`;
+        }
 
-        cirkel.appendChild(foxImg);
     </script>
+
 </body>
 
 </html>
