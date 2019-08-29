@@ -24,6 +24,7 @@
             line-height: 100px;
             text-align: center;
         }
+
     </style>
 </head>
 
@@ -36,11 +37,29 @@
 
 
     <script>
-        let firkant = document.querySelector("#firkant");
-        let cirkel = document.querySelector("#cirkel");
+        //den første måde jeg lavede det på
+        //const firkant = document.querySelector("#firkant");
+        //const cirkel = document.querySelector("#cirkel");
 
-        firkant.innerHTML = `<img src="img/frog.png" alt="frø">`;
-        cirkel.innerHTML = `<img src="img/pig.png" alt="gris">`;
+        //firkant.innerHTML = `<img src="img/frog.png" alt="frø">`;
+        //cirkel.innerHTML = `<img src="img/pig.png" alt="gris">`;
+
+        //den anden måde - vist på tavlen:
+        const firkantURL = `http://mabe-kea.dk/E19/pics/frog.png`;
+        const cirkelURL = `http://mabe-kea.dk/E19/pics/pig.png`;
+
+        const firkant = document.querySelector("#firkant");
+        const imgF = document.createElement("img");
+        imgF.src = firkantURL;
+        imgF.alt = "grøn frø";
+        firkant.appendChil(imgF);
+
+        const cirkel = document.querySelector("#cirkel");
+        const imgC = document.createElement("img");
+        imgC.src = firkantURL;
+        imgC.alt = "lyserød gris";
+        cirkel.appendChil(imgC);
+
     </script>
 </body>
 
