@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        div {
+            height: 100px;
+            background-color: orange;
+            transition: .5s;
+        }
+
+        .marker {
+            background-color: blue;
+            border-radius: 50%;
+        }
+
+        section {
+            display: grid;
+
+            /** 4 kolonner og deres størrelser =
+            grid-template-columns: 300px 100px 100px 100px; **/
+
+            /** gentag 6 kolonner 1 fraktion hver (lige store) =
+            grid-template-columns: repeat(6, 1fr); **/
+
+            /** hvor meget hver kolonne skal fylde i fraktioner =
+            grid-template-columns: 1fr 2fr 1fr 3fr;**/
+
+            /** auto-fill, den fylder op med kolonner så mange der kan være = **/
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+            /** mellemrum imellem elementerne i griddet = **/
+            grid-gap: 1em;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
+    <script>
+        const diver = document.querySelectorAll("div");
+        console.log(diver);
+
+        diver.forEach(div => {
+            div.addEventListener("click", marker);
+        })
+
+        function marker() {
+            this.classList.toggle("marker");
+        }
+    </script>
+</body>
+
+</html>
