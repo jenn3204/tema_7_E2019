@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        article {
+            border: 2px solid black;
+            margin: 5px;
+            padding: 10px;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        }
+    </style>
+</head>
+
+<body>
+
+    <template>
+        <article>
+            <img>
+            <h2>overskrift</h2>
+            <p>beskrivelse</p>
+            <h6>dato</h6>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+
+    <script>
+        const array = [{
+            billede: "https://dit-roskilde.dk/wp-content/uploads/2019/08/Cykelulykker-200x150.jpg",
+            overskrift: "Ældre er overrepræsenteret i cyklistulykker",
+            beskrivelse: "Når man har passeret pensionsalderen, er der rig mulighed for at leve et aktivt liv, hvilket mange seniorer heldigvis gør. Men desværre viser ulykkestallene, at alt for mange personer over 65 år også kommer til skade, når de bevæger sig rundt på cykel.",
+            dato: "23. august 2019"
+        }, {
+            billede: "https://dit-roskilde.dk/wp-content/uploads/2019/08/abw-regnvejr-paraply-200x150.jpg",
+            overskrift: "Oprydning efter skybrud kan være farligt",
+            beskrivelse: "Når vandet fosser ind i boligen eller virksomheden som følge af et skybrud, har de fleste mennesker kun én tanke i hovedet: at redde, hvad der reddes kan, og få det indtrængende vand stoppet i en pokkers fart.",
+            dato: "23. august 2019"
+        }, {
+            billede: "https://dit-roskilde.dk/wp-content/uploads/2019/08/Roskilde-Byløb-børn-august-2019-abw-7-200x150.jpg",
+            overskrift: "Roskilde byløb 2019",
+            beskrivelse: "Børneløbet blev skudt i gang kl. 18.00 og der var fart på de små ben! Dit Roskilde var et hurtigt smut forbi.",
+            dato: "22. august 2019"
+        }, {
+            billede: "https://dit-roskilde.dk/wp-content/uploads/2019/08/kronprinsen2010_Territorium-200x150.jpg",
+            overskrift: "H.K.H. Kronprinsen åbner Naturens Dag 2019",
+            beskrivelse: "5. klasse fra Bramsnæsvigskolen får sved på panden, når de sammen med Hans Kongelige Højhed Kronprinsen skyder Naturens Dag i gang i det betagende landskab i Ejby Ådal ved Roskilde.",
+            dato: "22. august 2019"
+        }, {
+            billede: "https://dit-roskilde.dk/wp-content/uploads/2019/08/Lego_robot-200x150.jpg",
+            overskrift: "Skandinavisk Lego finale kommer til Roskilde",
+            beskrivelse: "Skoleelever fra Danmark, Norge og Sverige dyster hvert år i november i den skandinaviske finale i First Lego League – verdens største teknologi- og projektturnering for 10-16 årige. Og i år kommer det til at foregå i Roskilde Kongrescenter Bauhaus Arena.",
+            dato: "22. august 2019"
+        }]
+
+        console.log(array);
+
+        const article = document.querySelector("article");
+        const skabelon = document.querySelector("template").content;
+        const liste = document.querySelector("#liste");
+
+        array.forEach(historie => {
+            const klon = skabelon.cloneNode(true);
+            console.log(klon);
+            const img = klon.querySelector("img");
+            img.src = historie.billede;
+            img.alt = "Billede fra " + historie.dato;
+            const h2 = klon.querySelector("h2");
+            h2.textContent = historie.overskrift;
+            const p = klon.querySelector("p");
+            p.textContent = historie.beskrivelse;
+            const h6 = klon.querySelector("h6");
+            h6.textContent = historie.dato;
+            liste.appendChild(klon);
+        })
+    </script>
+
+</body>
+
+</html>
