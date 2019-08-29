@@ -10,6 +10,7 @@
 <body>
 
     <article></article>
+    <img>
 
     <script>
         const dyr = {
@@ -19,10 +20,20 @@
             levested: "svinefarme"
         }
 
+        const article = document.querySelector("article");
+
         console.log(dyr);
 
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            article.textContent = `navn: ${dyr.navn}, type: ${dyr.type}, levested: ${dyr.levested}`;
+            const img = document.querySelector("img");
+            img.src = dyr.billede;
+            img.alt = "gris";
+
+        }
     </script>
 
 </body>
-
 </html>
