@@ -55,7 +55,7 @@
             const h2 = klon.querySelector("h2");
             h2.textContent = person.navn;
             h2.textContent += "Hold " + person.hold;
-            const img = document.querySelector("img");
+            const img = klon.querySelector("img");
             img.src = person.thumb;
             img.alt = "Billede af " + person.navn;
             listeElm.appendChild(klon);

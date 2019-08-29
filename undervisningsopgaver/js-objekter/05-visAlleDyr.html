@@ -9,11 +9,17 @@
 
 <body>
 
-    <article></article>
-    <img>
+    <template>
+        <article>
+            <p>navn type</p>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
 
     <script>
-        const dyr = [{
+        const dyrarray = [{
             navn: "gris",
             type: "pattedyr",
             billede: "http://mabe-kea.dk/E19/pics/pig.png",
@@ -40,20 +46,21 @@
             levested: "floden"
         }]
 
+        console.log(dyrarray);
+
         const article = document.querySelector("article");
+        const skabelon = document.querySelector("template").content;
+        const liste = document.querySelector("#liste");
 
-        console.log(dyr);
-
-        document.addEventListener("DOMContentLoaded", start);
-
-        function start() {
-            article.textContent = `navn: ${dyr.navn}, type: ${dyr.type}, levested: ${dyr.levested}`;
-            const img = document.querySelector("img");
-            img.src = dyr[0].billede;
-            img.alt = "gris";
-
-        }
-
+        dyrarray.forEach(dyr => {
+            const klon = skabelon.cloneNode(true);
+            console.log(klon);
+            const p = klon.querySelector("p");
+            p.textContent = dyr.navn + ", ";
+            p.textContent += dyr.type;
+            p.textContent += " fra " + dyr.levested;
+            liste.appendChild(klon);
+        })
     </script>
 
 </body>
