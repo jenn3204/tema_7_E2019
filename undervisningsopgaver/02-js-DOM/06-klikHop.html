@@ -24,6 +24,7 @@
             line-height: 100px;
             text-align: center;
         }
+
     </style>
 </head>
 
@@ -45,24 +46,26 @@
 
             firkant.innerHTML = `<img src="img/frog.png" alt="frø">`;
             cirkel.innerHTML = `<img src="img/pig.png" alt="gris">`;
+            //anden løsning ville være at foretrække, da innerHTML ikke er sikker
 
             firkant.addEventListener("click", flyt);
             cirkel.addEventListener("click", stop);
-
-            function flyt() {
-
-                let firkantStart = firkant.innerHTML;
-
-                firkant.innerHTML = cirkel.innerHTML;
-                cirkel.innerHTML = firkantStart;
-            }
-
-            function stop() {
-
-                firkant.removeEventListener("click", flyt);
-
-            }
         }
+
+        function flyt() {
+
+            let firkantStart = firkant.innerHTML;
+
+            firkant.innerHTML = cirkel.innerHTML;
+            cirkel.innerHTML = firkantStart;
+        }
+
+        function stop() {
+
+            firkant.removeEventListener("click", flyt);
+
+        }
+
     </script>
 
 </body>
