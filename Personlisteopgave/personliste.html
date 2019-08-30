@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+</head>
+
+<body>
+    <h1>Personliste</h1>
+
+    <template>
+        <article>
+            <h2>Navn</h2>
+            <img>
+            <a></a>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <script>
+        let personliste = [];
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            hentData();
+        }
+
+        async function hentData() {
+            let jsonData = await fetch("https://docs.google.com/spreadsheets/d/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/edit#gid=0");
+            console.log(jsonData);
+            personliste = await jsonData.json();
+            console.log(personliste);
+
+            visData();
+        }
+
+        function visData() {
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
+
+            personliste.forEach(person => {
+                const klon = skabelon.cloneNode(true);
+                console.log(klon);
+                const h2 = klon.querySelector("h2");
+                h2.textContent = person.navn;
+                const img = klon.querySelector("img");
+                img.src = person.billede;
+                img.alt = "Billede af " + person.navn;
+                const link = klon.querySelector("a");
+                link.href = "http://github.com/" + person.github;
+                liste.appendChild(klon);
+            })
+
+        }
+    </script>
+
+</body>
+
+</html>
