@@ -9,12 +9,54 @@
     <style>
         img {
             width: 100%;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        body {
+            background-color: whitesmoke;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: burlywood;
+            font-size: 3rem;
+
         }
 
         article {
-            border: 1px solid black;
+            border: 3px solid burlywood;
+            background-color: white;
+            padding: 10px;
+            text-align: center;
         }
 
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 0.5rem;
+            width: 90vw;
+            margin: 1vw auto;
+        }
+
+        a {
+            font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 4px;
+        }
+
+        a {
+            color: rosybrown;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-transform: uppercase;
+        }
     </style>
 </head>
 
@@ -25,7 +67,10 @@
         <article>
             <h2>Navn</h2>
             <img>
+            <p class="alder"></p>
+            <p class="hold"></p>
             <a></a>
+            <p class="historie"></p>
         </article>
     </template>
 
@@ -61,14 +106,20 @@
                 const img = klon.querySelector("img");
                 img.src = person.gsx$billede.$t;
                 img.alt = "Billede af " + person.gsx$navn.$t;
+                const alder = klon.querySelector(".alder");
+                alder.textContent = "Alder: " + person.gsx$alder.$t;
+                const hold = klon.querySelector(".hold");
+                hold.textContent = "Hold: " + person.gsx$hold.$t;
                 const link = klon.querySelector("a");
                 link.setAttribute("href", "http://github.com/" + person.gsx$github.$t);
                 link.textContent = "Link til github"
+                const historie = klon.querySelector(".historie");
+                historie.textContent = person.gsx$historie.$t;
+
                 liste.appendChild(klon);
             })
 
         }
-
     </script>
 
 </body>
