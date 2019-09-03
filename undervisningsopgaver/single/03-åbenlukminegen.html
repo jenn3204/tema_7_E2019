@@ -85,12 +85,12 @@
             position: fixed;
             top: 0;
             right: 0;
-            font-size: 4rem;
+            font-size: 3rem;
         }
 
         #detalje .person {
-            width: 60vw;
-            min-height: 50vh;
+            width: 40vw;
+            min-height: 30vh;
             margin: 4rem auto;
             padding: 4rem;
             background: white;
@@ -113,7 +113,6 @@
         a:hover {
             color: darksalmon;
         }
-
     </style>
 </head>
 
@@ -156,7 +155,7 @@
         //globale konstanter
         let personliste = [];
         let filter = "alle";
-        const filterKnapper = document.querySelectorAll("button");
+        const filterKnapper = document.querySelectorAll("nav button");
         const skabelon = document.querySelector("template").content;
         const liste = document.querySelector("#liste");
 
@@ -244,7 +243,6 @@
         function skjulDetalje() {
             document.querySelector("#detalje").style.display = "none";
         }
-
     </script>
 
 </body>

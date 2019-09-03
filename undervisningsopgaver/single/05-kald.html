@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+
+    <style>
+        img {
+            width: 100%;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        body {
+            background-color: whitesmoke;
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        button {
+            background-color: burlywood;
+            border: none;
+            padding: 10px 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        button:hover {
+            background-color: antiquewhite;
+        }
+
+        .valgt {
+            background-color: antiquewhite;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: burlywood;
+            font-size: 3rem;
+            margin: 0;
+            padding: 0;
+
+        }
+
+        h2 {
+            text-transform: uppercase;
+            text-align: center;
+            margin: 10px;
+            padding: 0;
+        }
+
+        article {
+            border: 2px solid burlywood;
+            background-color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 0.5rem;
+            width: 80vw;
+            margin: 1vw auto;
+        }
+
+        a {
+            font-size: 1.1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 4px;
+        }
+
+        a {
+            color: rosybrown;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: darksalmon;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Personliste</h1>
+    <h2>MMD 2019</h2>
+
+    <nav>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="andet">Andet</button>
+    </nav>
+
+    <template>
+        <article>
+            <h2>Navn</h2>
+            <img>
+            <p class="alder"></p>
+            <p class="hold"></p>
+            <a></a>
+            <p class="historie"></p>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        //globale konstanter
+        let personliste = [];
+        let filter = "alle";
+        const filterKnapper = document.querySelectorAll("button");
+        const skabelon = document.querySelector("template").content;
+        const liste = document.querySelector("#liste");
+
+        //første funktion efter DOM er loaded
+        function start() {
+            hentData();
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrer));
+        }
+
+        //funktion der filtrerer i køn
+        function filtrer() {
+            console.log(this);
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt");
+            filter = this.dataset.køn;
+            console.log(filter);
+            visData();
+        }
+
+        //funktion der henter data fra google sheet (url)
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/od6/public/values?alt=json");
+            console.log(jsonData);
+            personliste = await jsonData.json();
+            console.log(personliste);
+
+            visData();
+        }
+
+        //funktion der viser dataen
+        function visData() {
+            liste.textContent = ""; //nulstiller så den fjerne hvad der var i forvejen, så den kun viser den nyeste der er trykket på
+            personliste.feed.entry.forEach(person => {
+                //Dette skal ske enten hvis der enten er et match i køn eller hvis kønnet er alle
+                if (person.gsx$køn.$t == filter || filter == "alle") {
+                    const klon = skabelon.cloneNode(true);
+                    console.log(klon);
+
+                    const h2 = klon.querySelector("h2");
+                    h2.textContent = person.gsx$navn.$t;
+                    //kunne også skrives sådan: klon.querySelector("h2").textContent = person.gsx$navn.$t (det samme gælder de andre nedenunder)
+
+                    const img = klon.querySelector("img");
+                    img.src = person.gsx$billede.$t;
+                    img.alt = "Billede af " + person.gsx$navn.$t;
+
+                    const alder = klon.querySelector(".alder");
+                    alder.textContent = "Alder: " + person.gsx$alder.$t;
+
+                    const hold = klon.querySelector(".hold");
+                    hold.textContent = "Hold: " + person.gsx$hold.$t;
+
+                    const link = klon.querySelector("a");
+                    link.setAttribute("href", "http://github.com/" + person.gsx$github.$t);
+                    link.textContent = "Link til github";
+
+                    const historie = klon.querySelector(".historie");
+                    historie.textContent = person.gsx$historie.$t;
+
+
+                    liste.appendChild(klon);
+                    liste.lastElementChild.addEventListener("click", () => {
+                        location.href = `06-detalje.html?github=${person.gsx$github.$t}`;
+                    });
+                }
+            })
+
+        }
+
+    </script>
+
+</body>
+
+</html>

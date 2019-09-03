@@ -49,7 +49,6 @@
         .valgt {
             background-color: red;
         }
-
     </style>
 </head>
 
@@ -86,10 +85,11 @@
         let filter = "alle";
         // første funktion der kaldes efter DOM er loaded
         function start() {
-            const filterKnapper = document.querySelectorAll("button");
+            const filterKnapper = document.querySelectorAll("nav button");
             filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
-            loadData();
             skjulDetalje();
+            loadData();
+
         }
         // funktion der filtrerer personer (json)
         function filtrerPersoner() {
@@ -145,7 +145,6 @@
             document.querySelector("#detalje").style.display = "none";
 
         }
-
     </script>
 </body>
 
