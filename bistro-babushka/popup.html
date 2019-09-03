@@ -11,6 +11,10 @@
             width: 100%;
         }
 
+        body {
+            background-color: floralwhite;
+        }
+
         h1 {
             text-align: center;
         }
@@ -18,23 +22,30 @@
         #liste {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 0.5rem;
+            grid-gap: 2rem;
             width: 70vw;
             margin: 1vw auto;
         }
 
         #liste img {
+            cursor: pointer;
             border-radius: 50%;
         }
 
         nav {
-            width: 70vw;
-            margin: 1vw auto;
+            text-align: center;
+            margin: 30px;
+        }
+
+        nav button {
+            background-color: antiquewhite;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
         }
 
         article {
             text-align: center;
-            background-color: burlywood;
         }
 
         #detalje {
@@ -43,7 +54,8 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: hsla(338, 14%, 66%, 0.53);
+            /*background: hsla(338, 14%, 66%, 0.53);*/
+            background-color: #6c667787;
             overflow: scroll;
         }
 
@@ -53,6 +65,9 @@
             right: 0;
             font-size: 3rem;
             border: none;
+            background: none;
+            cursor: pointer;
+
         }
 
         #detalje .ret {
