@@ -27,6 +27,7 @@
             padding: 10px 30px;
             font-size: 0.9rem;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         button:hover {
@@ -59,6 +60,7 @@
             background-color: white;
             padding: 10px;
             text-align: center;
+            cursor: pointer;
         }
 
         #liste {
@@ -76,6 +78,7 @@
             width: 100vw;
             height: 100vh;
             background: hsla(338, 14%, 66%, 0.53);
+            overflow: scroll;
         }
 
         #detalje .luk {
@@ -161,7 +164,7 @@
         function start() {
             hentData();
             filterKnapper.forEach(knap => knap.addEventListener("click", filtrer));
-            document.querySelector("#detalje").style.display = "none";
+            skjulDetalje();
         }
 
         //funktion der filtrerer i køn
@@ -227,6 +230,7 @@
 
         function visDetalje(person) {
             document.querySelector("#detalje").style.display = "block";
+            document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
 
             document.querySelector("#detalje h2").textContent = person.gsx$navn.$t;
             document.querySelector("#detalje img").src = person.gsx$billede.$t;
@@ -235,6 +239,10 @@
             document.querySelector("#detalje .githubLink").textContent = `github.com/${person.gsx$github.$t}`
 
 
+        }
+
+        function skjulDetalje() {
+            document.querySelector("#detalje").style.display = "none";
         }
 
     </script>

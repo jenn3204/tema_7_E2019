@@ -30,6 +30,7 @@
             top: 0;
             right: 0;
             font-size: 4rem;
+            cursor: pointer;
         }
 
         #detalje .person {
@@ -88,7 +89,7 @@
             const filterKnapper = document.querySelectorAll("button");
             filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
             loadData();
-            document.querySelector("#detalje").style.display = "none";
+            skjulDetalje();
         }
         // funktion der filtrerer personer (json)
         function filtrerPersoner() {
@@ -129,12 +130,19 @@
 
             document.querySelector("#detalje").style.display = "block";
 
+            document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
+
             document.querySelector("#detalje h2").textContent = person.gsx$navn.$t;
             document.querySelector("#detalje img").src = person.gsx$billede.$t;
             document.querySelector("#detalje img").alt = `Billede af ${person.gsx$navn.$t}`;
             document.querySelector("#detalje .githubLink").href = `https://github.com/${person.gsx$github.$t}`;
             document.querySelector("#detalje .githubLink").textContent = `github.com/${person.gsx$github.$t}`
 
+
+        }
+
+        function skjulDetalje() {
+            document.querySelector("#detalje").style.display = "none";
 
         }
 
