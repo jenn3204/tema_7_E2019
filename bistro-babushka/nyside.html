@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Babushka</title>
+
+    <style>
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 0.5rem;
+            width: 70vw;
+            margin: 1vw auto;
+        }
+
+        #liste img {
+            border-radius: 50%;
+        }
+
+        nav {
+            width: 70vw;
+            margin: 1vw auto;
+        }
+
+        article {
+            text-align: center;
+            background-color: burlywood;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bistro Babushka</h1>
+    <nav>
+        <button class="filter valgt" data-kategori="alle">Alle</button>
+        <button class="filter" data-kategori="forretter">Forretter</button>
+        <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+        <button class="filter" data-kategori="desserter">Desserter</button>
+        <button class="filter" data-kategori="sideorders">Side orders</button>
+        <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+
+    <template>
+        <article class="ret">
+            <img>
+            <h2></h2>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        let menu = [];
+        let filter = "alle";
+        let filterKnapper = document.querySelectorAll("nav button");
+        const skabelon = document.querySelector("template").content;
+        const liste = document.querySelector("#liste");
+
+        function start() {
+            hentData();
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrer));
+
+        }
+
+        function filtrer() {
+            document.querySelector(".valgt").classList.remove("valgt");
+            this.classList.add("valgt");
+            filter = this.dataset.kategori;
+            visData();
+
+        }
+
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
+            menu = await jsonData.json();
+            visData();
+
+        }
+
+        function visData() {
+            liste.textContent = "";
+
+            menu.feed.entry.forEach(ret => {
+                if (ret.gsx$kategori.$t == filter || filter == "alle") {
+                    const klon = skabelon.cloneNode(true);
+
+                    klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("img").alt = ret.gsx$navn.$t;
+
+                    klon.querySelector("h2").textContent = ret.gsx$navn.$t;
+
+                    liste.appendChild(klon);
+
+                    liste.lastElementChild.addEventListener("click", () => {
+                        location.href = `detalje.html?id=${ret.gsx$id.$t}`;
+                    });
+
+                }
+
+            })
+
+        }
+    </script>
+
+</body>
+</html>
