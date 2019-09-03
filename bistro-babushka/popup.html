@@ -5,6 +5,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
+
+    <style>
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 0.5rem;
+            width: 70vw;
+            margin: 1vw auto;
+        }
+
+        #liste img {
+            border-radius: 50%;
+        }
+
+        nav {
+            width: 70vw;
+            margin: 1vw auto;
+        }
+
+        article {
+            text-align: center;
+            background-color: burlywood;
+        }
+
+        #detalje {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: hsla(338, 14%, 66%, 0.53);
+            overflow: scroll;
+        }
+
+        #detalje .luk {
+            position: fixed;
+            top: 0;
+            right: 0;
+            font-size: 3rem;
+            border: none;
+        }
+
+        #detalje .ret {
+            width: 40vw;
+            min-height: 30vh;
+            margin: 1rem auto;
+            padding: 2rem;
+            background: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +81,6 @@
         <article class="ret">
             <img>
             <h2></h2>
-            <p></p>
         </article>
     </template>
 
@@ -31,8 +88,10 @@
 
     <section id="detalje">
         <article class="ret">
+            <button class="luk">✕</button>
             <h1></h1>
             <img>
+            <h3></h3>
             <p id="beskrivelse"></p>
             <p id="pris"></p>
         </article>
@@ -76,22 +135,40 @@
                 if (ret.gsx$kategori.$t == filter || filter == "alle") {
                     const klon = skabelon.cloneNode(true);
 
+                    klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("img").alt = ret.gsx$navn.$t;
+
+                    klon.querySelector("h2").textContent = ret.gsx$navn.$t;
+
+                    klon.querySelector(".ret").addEventListener("click", () => {
+                        visDetalje(ret);
+                    })
+
+                    liste.appendChild(klon);
+
                 }
 
             })
 
-
-
         }
 
         function skjulDetalje() {
+            document.querySelector("#detalje").style.display = "none";
 
         }
 
-        function visDetalje() {
+        function visDetalje(ret) {
+            document.querySelector("#detalje").style.display = "block";
+            document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
+
+            document.querySelector("#detalje h1").textContent = ret.gsx$navn.$t;
+            document.querySelector("#detalje img").src = `imgs/large/${ret.gsx$billede.$t}.jpg`;
+            document.querySelector("#detalje img").alt = ret.gsx$navn.$t;
+            document.querySelector("#detalje h3").textContent = "Oprindelse: " + ret.gsx$oprindelse.$t;
+            document.querySelector("#beskrivelse").textContent = ret.gsx$lang.$t;
+            document.querySelector("#pris").textContent = `Pris: ${ret.gsx$pris.$t} kr.`;
 
         }
-
     </script>
 
 </body>
