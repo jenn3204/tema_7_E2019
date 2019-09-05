@@ -5,84 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bistro Babushka</title>
-
-    <style>
-        img {
-            width: 100%;
-        }
-
-        body {
-            background-color: floralwhite;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        #liste {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-gap: 2rem;
-            width: 70vw;
-            margin: 1vw auto;
-        }
-
-        #liste img {
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        nav {
-            text-align: center;
-            margin: 30px;
-        }
-
-        nav button {
-            background-color: antiquewhite;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        article {
-            text-align: center;
-        }
-
-        #detalje {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            /*background: hsla(338, 14%, 66%, 0.53);*/
-            background-color: #6c667787;
-            overflow: scroll;
-        }
-
-        #detalje .luk {
-            position: fixed;
-            top: 0;
-            right: 0;
-            font-size: 3rem;
-            border: none;
-            background: none;
-            cursor: pointer;
-
-        }
-
-        #detalje .ret {
-            width: 40vw;
-            min-height: 30vh;
-            margin: 1rem auto;
-            padding: 2rem;
-            background: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Bistro Babushka</h1>
+    <header>
+        <h1>Bistro Babushka</h1>
+    </header>
     <nav>
         <button class="filter valgt" data-kategori="alle">Alle</button>
         <button class="filter" data-kategori="forretter">Forretter</button>
@@ -101,7 +31,7 @@
 
     <section id="liste"></section>
 
-    <section id="detalje">
+    <section id="info">
         <article class="ret">
             <button class="luk">✕</button>
             <h1></h1>
@@ -124,7 +54,7 @@
         function start() {
             hentData();
             filterKnapper.forEach(knap => knap.addEventListener("click", filtrer));
-            skjulDetalje();
+            skjulInfo();
 
         }
 
@@ -156,7 +86,7 @@
                     klon.querySelector("h2").textContent = ret.gsx$navn.$t;
 
                     klon.querySelector(".ret").addEventListener("click", () => {
-                        visDetalje(ret);
+                        visInfo(ret);
                     })
 
                     liste.appendChild(klon);
@@ -167,19 +97,19 @@
 
         }
 
-        function skjulDetalje() {
-            document.querySelector("#detalje").style.display = "none";
+        function skjulInfo() {
+            document.querySelector("#info").style.display = "none";
 
         }
 
-        function visDetalje(ret) {
-            document.querySelector("#detalje").style.display = "block";
-            document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
+        function visInfo(ret) {
+            document.querySelector("#info").style.display = "block";
+            document.querySelector("#info .luk").addEventListener("click", skjulInfo);
 
-            document.querySelector("#detalje h1").textContent = ret.gsx$navn.$t;
-            document.querySelector("#detalje img").src = `imgs/large/${ret.gsx$billede.$t}.jpg`;
-            document.querySelector("#detalje img").alt = ret.gsx$navn.$t;
-            document.querySelector("#detalje h3").textContent = "Oprindelse: " + ret.gsx$oprindelse.$t;
+            document.querySelector("#info h1").textContent = ret.gsx$navn.$t;
+            document.querySelector("#info img").src = `imgs/large/${ret.gsx$billede.$t}.jpg`;
+            document.querySelector("#info img").alt = ret.gsx$navn.$t;
+            document.querySelector("#info h3").textContent = "Oprindelse: " + ret.gsx$oprindelse.$t;
             document.querySelector("#beskrivelse").textContent = ret.gsx$lang.$t;
             document.querySelector("#pris").textContent = `Pris: ${ret.gsx$pris.$t} kr.`;
 
