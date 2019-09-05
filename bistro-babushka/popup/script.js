@@ -1,9 +1,3 @@
-if (document.querySelector("#detalje")) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get("id");
-    console.log(id);
-}
-
 document.addEventListener("DOMContentLoaded", start);
 
 let menu = [];
@@ -15,15 +9,7 @@ const liste = document.querySelector("#liste");
 function start() {
     hentData();
     filterKnapper.forEach(knap => knap.addEventListener("click", filtrer));
-    if (document.querySelector("#info")) {
-        skjulInfo();
-    }
-
-    if (document.querySelector("#detalje")) {
-        document.querySelector(".luk").addEventListener("click", () => {
-            history.back();
-        })
-    }
+    skjulInfo();
 
 }
 
@@ -54,19 +40,11 @@ function visData() {
 
             klon.querySelector("h2").textContent = ret.gsx$navn.$t;
 
-            if (document.querySelector("#info")) {
-                klon.querySelector(".ret").addEventListener("click", () => {
-                    visInfo(ret);
-                })
-            }
+            klon.querySelector(".ret").addEventListener("click", () => {
+                visInfo(ret);
+            })
 
             liste.appendChild(klon);
-
-            if (document.querySelector("#nyside")) {
-                liste.lastElementChild.addEventListener("click", () => {
-                    location.href = `detalje.html?id=${ret.gsx$id.$t}`;
-                })
-            }
 
         }
 

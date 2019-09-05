@@ -83,36 +83,6 @@
          transform: scale(1.02);
      }
 
-     #info {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100vw;
-         height: 100vh;
-         background-color: #483a2187;
-         overflow: scroll;
-     }
-
-     #info .luk {
-         position: fixed;
-         top: 0;
-         right: 0;
-         font-size: 3rem;
-         border: none;
-         background: none;
-         cursor: pointer;
-
-     }
-
-     #info .ret {
-         width: 40vw;
-         min-height: 30vh;
-         margin: 1rem auto;
-         padding: 2rem;
-         background: whitesmoke;
-         border-radius: 5%;
-     }
-
      #pris {
          font-weight: bold;
      }
@@ -151,7 +121,7 @@
 
      @media only screen and (max-width: 800px) {
 
-         #info .ret,
+
          #detalje .ret {
              width: 80vw;
          }
