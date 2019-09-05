@@ -7,6 +7,13 @@
          margin: 0;
      }
 
+     h1 {
+         font-size: 2rem;
+         margin: 0;
+         padding: 0;
+         text-align: center;
+     }
+
      header {
          text-align: center;
          background-image: url(imgs/large/bochkarev.jpg);
@@ -27,26 +34,6 @@
      header h2 {
          color: whitesmoke;
          font-size: 2rem;
-     }
-
-     h1 {
-         font-size: 2rem;
-         margin: 0;
-         padding: 0;
-         text-align: center;
-     }
-
-     #liste {
-         display: grid;
-         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-         grid-gap: 1rem;
-         width: 70vw;
-         margin: 1vw auto;
-     }
-
-     #liste img {
-         border-top-right-radius: 5%;
-         border-top-left-radius: 5%;
      }
 
      nav {
@@ -71,6 +58,23 @@
      .valgt {
          background-color: burlywood;
      }
+
+
+
+     #liste {
+         display: grid;
+         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+         grid-gap: 1rem;
+         width: 70vw;
+         margin: 1vw auto;
+     }
+
+     #liste img {
+         border-top-right-radius: 5%;
+         border-top-left-radius: 5%;
+     }
+
+
 
      #liste .ret {
          text-align: center;
